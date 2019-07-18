@@ -21,10 +21,7 @@ if($method == 'POST'){
 		case 'anything':
 			$speech = "Yes, you can type anything here.";
 			break;
-		
-		default:
-			$speech = "Maaf kami belum menemukan jawabannya, sebentar ya.";
-			break;
+
 	}
 
 	$response = new \stdClass();
