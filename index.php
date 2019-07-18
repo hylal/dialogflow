@@ -38,6 +38,4 @@ else
 	echo "Method not allowed";
 }
 
-
-error_log( $request_body );
 ?>
