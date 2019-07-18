@@ -7,7 +7,7 @@ if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
 
-	$text = $json->results->metadata->intentName;
+	$text = $json->result->parameters->text;
 
 	switch ($text) {
 		case 'hi':
@@ -23,16 +23,14 @@ if($method == 'POST'){
 			break;
 		
 		default:
-			$speech = "Kok keluarnya ini terus ya.";
+			$speech = "Maap gini terus";
 			break;
 	}
 
 	$response = new \stdClass();
-	$response->speech = "$speech";
-	$response->displayText = "$speech";
-	$response->source = 'source-of-the-response';
-	$response->return = "$speech";
-	$response->fulfillmentText = "$speech";
+	$response->speech = $speech;
+	$response->displayText = $speech;
+	$response->source = "webhook";
 	echo json_encode($response);
 }
 else
