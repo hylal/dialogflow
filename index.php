@@ -1,31 +1,41 @@
-
 <?php 
+
 $method = $_SERVER['REQUEST_METHOD'];
 
-if($method == 'GET'){
-    $requestBody = file_get_contents('php://input');
-    $json = json_decode($requestBody);
+// Process only when method is POST
+if($method == 'POST'){
+	$requestBody = file_get_contents('php://input');
+	$json = json_decode($requestBody);
 
-    $text = $json->metadata->intentName->text;
+	$text = $json->result->parameters->text;
 
-    switch ($text) {
-        case 'Name':
-            $speech = "This question is too personal";
-            break;
+	switch ($text) {
+		case 'hi':
+			$speech = "Hi, Nice to meet you";
+			break;
 
-        default:
-            $speech = "Sorry, I didnt get that.";
-            break;
-    }
+		case 'bye':
+			$speech = "Bye, good night";
+			break;
 
-    $response = new \stdClass();
-    $response->speech = $speech;
-    $response->displayText = $speech;
-    $response->source = "webhook";
-    echo json_encode($response);
+		case 'anything':
+			$speech = "Yes, you can type anything here.";
+			break;
+		
+		default:
+			$speech = "Sorry, I didnt get that. Please ask me something else.";
+			break;
+	}
+
+	$response = new \stdClass();
+	$response->speech = $speech;
+	$response->displayText = $speech;
+	$response->source = "webhook";
+	echo json_encode($response);
 }
 else
 {
-    echo "Method not allowed";
+	echo "Method not allowed";
 }
+
 ?>
