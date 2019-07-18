@@ -7,9 +7,9 @@ if($method == 'POST'){
 	$requestBody = file_get_contents('php://input');
 	$json = json_decode($requestBody);
 
-	$text = $json->result->parameters->text;
+	$anything = $json->result->parameters->anything;
 
-	switch ($text) {
+	switch ($anything) {
 		case 'hi':
 			$speech = "Hi, Nice to meet you";
 			break;
